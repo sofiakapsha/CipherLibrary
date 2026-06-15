@@ -35,5 +35,8 @@
     <ClCompile Include="cipher_vigenère.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cipher_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

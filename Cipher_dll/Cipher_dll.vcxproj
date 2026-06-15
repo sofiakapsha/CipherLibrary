@@ -156,6 +156,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cipher_api.cpp" />
     <ClCompile Include="cipher_caesar.cpp" />
     <ClCompile Include="cipher_vigenère.cpp" />
     <ClCompile Include="pch.cpp">
