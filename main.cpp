@@ -12,6 +12,8 @@ int main() {
         return 1;
     }
 
+    std::cout << "cipher.dll loaded successfully at runtime." << std::endl;
+
     typedef cipher_t(*CreateCaesarFunc)(int);
     CreateCaesarFunc create_caesar = (CreateCaesarFunc)GetProcAddress(hLib, "cipher_create_caesar");
 
@@ -38,6 +40,8 @@ int main() {
         FreeLibrary(hLib);
         return 1;
     }
+
+    std::cout << "All function pointers resolved correctly." << std::endl;
 
     while (true) {
 
