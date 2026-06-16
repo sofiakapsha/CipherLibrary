@@ -32,7 +32,7 @@
     <ClCompile Include="cipher_caesar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cipher_vigenère.cpp">
+    <ClCompile Include="cipher_vigenere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cipher_api.cpp">

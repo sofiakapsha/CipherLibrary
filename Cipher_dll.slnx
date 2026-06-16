@@ -3,5 +3,8 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="main.cpp" />
+  </Folder>
   <Project Path="Cipher_dll/Cipher_dll.vcxproj" Id="774458c9-b1f8-45b5-a169-668638e25c61" />
 </Solution>
