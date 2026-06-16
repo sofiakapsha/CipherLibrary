@@ -36,32 +36,110 @@ int main() {
         return 1;
     }
 
-    const char* answer = "Hello world";
+    while (true) {
 
-    cipher_t cipher_c = create_caesar(3);
+        int answer;
 
-    char* code = encrypt(cipher_c, answer);
-    std::printf("Caesar Encrypted: %s\n", code);
+        std::printf("\nCommand menu:\n");
+        std::printf("1 - Caesar cipher\n");
+        std::printf("2 - Vigenere cipher\n");
+        std::printf("3 - Exit\n");
 
-    char* d_code = decrypt(cipher_c, code);
-    std::printf("Caesar Decrypted: %s\n", d_code);
+        std::scanf("%d", &answer);
 
-    free_func(d_code);
-    destroy(cipher_c);
-    free_func(code);
+        while (getchar() != '\n');
 
-    cipher_t cipher_v = create_vigenere("Love");
+        switch (answer) {
+        case 1: {
+            int length;
+            std::printf("Choose the length for cipher:\n");
+            std::scanf("%d", &length);
+            while (getchar() != '\n');
 
-    char* enc = encrypt(cipher_v, answer);
-    std::printf("Vigenere Encrypted: %s\n", enc);
+            cipher_t cipher_c = create_caesar(length);
 
-    char* dec = decrypt(cipher_v, enc);
-    std::printf("Vigenere Decrypted: %s\n", dec);
+            int choice;
 
-    free_func(dec);
-    destroy(cipher_v);
-    free_func(enc);
-    
+            std::printf("Choose encrypt (1) or decrypt (2):\n");
+            std::scanf("%d", &choice);
+            while (getchar() != '\n');
+
+            if (choice == 1) {
+                std::string text;
+
+                std::printf("Write the text to encrypt:\n");
+                std::getline(std::cin, text);
+
+                char* code = encrypt(cipher_c, text.c_str());
+                std::printf("Caesar Encrypted: %s\n", code);
+
+                free_func(code);
+            }
+            else if (choice == 2) {
+                std::string text;
+
+                std::printf("Write the text to decrypt:\n");
+                std::getline(std::cin, text);
+
+                char* d_code = decrypt(cipher_c, text.c_str());
+                std::printf("Caesar Decrypted: %s\n", d_code);
+
+                free_func(d_code);
+            }
+
+            destroy(cipher_c);
+
+        }
+              break;
+        case 2: {
+
+            std::string key;
+            std::printf("Choose the key for cipher:\n");
+            std::getline(std::cin, key);
+
+            cipher_t cipher_v = create_vigenere(key.c_str());
+
+            int choice;
+
+            std::printf("Choose encrypt (1) or decrypt (2):\n");
+            std::scanf("%d", &choice);
+            while (getchar() != '\n');
+
+            if (choice == 1) {
+                std::string text;
+
+                std::printf("Write the text to encrypt:\n");
+                std::getline(std::cin, text);
+
+                char* enc = encrypt(cipher_v, text.c_str());
+                std::printf("Vigenere Encrypted: %s\n", enc);
+
+                free_func(enc);
+            }
+            else if (choice == 2) {
+                std::string text;
+
+                std::printf("Write the text to decrypt:\n");
+                std::getline(std::cin, text);
+
+                char* dec = decrypt(cipher_v, text.c_str());
+                std::printf("Vigenere Decrypted: %s\n", dec);
+
+                free_func(dec);
+
+            }
+
+            destroy(cipher_v);
+        }
+              break;
+        case 3: {
+            FreeLibrary(hLib);
+            return 0; 
+            break;
+        }
+        }
+    }
+
     FreeLibrary(hLib);
     return 0;
 }
