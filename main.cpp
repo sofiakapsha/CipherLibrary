@@ -18,6 +18,9 @@ int main() {
     typedef cipher_t(*CreateVigenereFunc)(const char*);
     CreateVigenereFunc create_vigenere = (CreateVigenereFunc)GetProcAddress(hLib, "cipher_create_vigenere");
 
+    typedef cipher_t(*CreateAtbashFunc)();
+    CreateAtbashFunc create_atbash = (CreateAtbashFunc)GetProcAddress(hLib, "cipher_create_atbash");
+
     typedef char* (*EncryptFunc)(cipher_t, const char*);
     EncryptFunc encrypt = (EncryptFunc)GetProcAddress(hLib, "cipher_encrypt");
 
@@ -30,7 +33,7 @@ int main() {
     typedef void(*DestroyFunc)(cipher_t);
     DestroyFunc destroy = (DestroyFunc)GetProcAddress(hLib, "cipher_destroy");
 
-    if (!create_caesar || !encrypt || !decrypt || !free_func || !destroy) {
+    if (!create_caesar || !create_vigenere || !create_atbash || !encrypt || !decrypt || !free_func || !destroy) {
         std::cout << "Error: loading functions!" << std::endl;
         FreeLibrary(hLib);
         return 1;
@@ -43,7 +46,8 @@ int main() {
         std::printf("\nCommand menu:\n");
         std::printf("1 - Caesar cipher\n");
         std::printf("2 - Vigenere cipher\n");
-        std::printf("3 - Exit\n");
+        std::printf("3 - Atbash cipher\n");
+        std::printf("4 - Exit\n");
 
         std::scanf("%d", &answer);
 
@@ -132,7 +136,45 @@ int main() {
             destroy(cipher_v);
         }
               break;
+
         case 3: {
+
+            cipher_t cipher_a = create_atbash();
+
+            int choice;
+
+            std::printf("Choose encrypt (1) or decrypt (2):\n");
+            std::scanf("%d", &choice);
+            while (getchar() != '\n');
+
+            if (choice == 1) {
+                std::string text;
+
+                std::printf("Write the text to encrypt:\n");
+                std::getline(std::cin, text);
+
+                char* enc = encrypt(cipher_a, text.c_str());
+                std::printf("Atbash Encrypted: %s\n", enc);
+
+                free_func(enc);
+            }
+            else if (choice == 2) {
+                std::string text;
+
+                std::printf("Write the text to decrypt:\n");
+                std::getline(std::cin, text);
+
+                char* dec = decrypt(cipher_a, text.c_str());
+                std::printf("Atbash Decrypted: %s\n", dec);
+
+                free_func(dec);
+
+            }
+
+            destroy(cipher_a);
+        }
+              break;
+        case 4: {
             FreeLibrary(hLib);
             return 0; 
             break;

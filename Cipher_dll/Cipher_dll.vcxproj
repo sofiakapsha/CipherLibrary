@@ -156,6 +156,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="atbash_cipher.cpp" />
     <ClCompile Include="cipher_api.cpp" />
     <ClCompile Include="cipher_caesar.cpp" />
     <ClCompile Include="cipher_vigenere.cpp" />

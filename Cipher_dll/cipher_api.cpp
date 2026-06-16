@@ -16,6 +16,10 @@ extern "C" {
         return static_cast<cipher_t>(new VigenereCipher(key));
     }
 
+    EXPORT cipher_t cipher_create_atbash() {
+        return static_cast<cipher_t>(new AtbashCipher());
+    }
+
     EXPORT char* cipher_encrypt(cipher_t cipher, const char* text) {
         Cipher* e_cipher = static_cast<Cipher*>(cipher);
 
