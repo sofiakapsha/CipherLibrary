@@ -53,7 +53,7 @@ The console application lets the user:
 
 ## Project Structure
 
-- `cipher.h` / `cipher.cpp` — `Cipher` base class and derived cipher implementations
+- `cipher.h` — `Cipher` base class and derived cipher implementations
 - `cipher_api.h` / `cipher_api.cpp` — C-style factory API, `extern "C"` exports
 - `main.cpp` — CLI executable, dynamic library loading and function resolution
 
